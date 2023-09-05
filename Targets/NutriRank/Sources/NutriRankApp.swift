@@ -5,7 +5,7 @@ import NutriRankUI
 struct NutriRankApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            FakeDoorView()
         }
     }
 }
