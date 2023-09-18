@@ -7,13 +7,28 @@
 //
 
 import Foundation
-//import NutriRankKit
 
-class ChallengeGroupViewModel {
-    let challengeGroupUseCase: CreateChallengeGroupUseCase
-
-    init(challengeGroupUseCase: CreateChallengeGroupUseCase) {
-        self.challengeGroupUseCase = challengeGroupUseCase
-    }
+class ChallengeGroupViewModel: ObservableObject {
+//    var group: ChallengeGroup
+//    @Published var groups: [ChallengeGroup]
+//
+//    let createChallengeGroupUseCase: CreateChallengeGroupUseCase
+//
+//    init(challengeGroupUseCase: CreateChallengeGroupUseCase, group: ChallengeGroup, groups: [ChallengeGroup]) {
+//        self.createChallengeGroupUseCase = challengeGroupUseCase
+//        self.group = ChallengeGroup()
+//        self.groups = []
+//    }
+//
+//    func createGroup() async {
+//        await createChallengeGroupUseCase.execute(requestValue: group) { result in
+//            switch result {
+//            case .success(let group):
+//                self.groups.append(group)
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
+//    }
 }
 

@@ -7,20 +7,43 @@
 //
 
 import Foundation
-import NutriRankKit
 
-public protocol ChallengeGroupRepositoryProtocol {
+protocol ChallengeGroupRepositoryProtocol {
     func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void)
-    func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void)
+    func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error>
 }
 
 class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
-    func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
 
+    let data: ChallengeGroupRepositoryProtocol
+
+    init(data: ChallengeGroupRepositoryProtocol) {
+        self.data = data
     }
 
-    func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) {
-        // cria e salva um grupo no cloud kit
+    func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
+        
+    }
+
+//    func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) {
+//        client.createChallengeGroup(group: group) { result in
+//            switch result {
+//            case .success(let group):
+//                completion(.success(group))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
+
+    func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+            let result = await data.createChallengeGroup(group: group)
+            switch result {
+            case .success(let group):
+                return .success(group)
+            case .failure(let error):
+                return .failure(error)
+            }
     }
 }
 

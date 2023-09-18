@@ -10,10 +10,10 @@ import Foundation
 import Nuvem
 import CloudKit
 
-struct Member: CKModel {
-    var record: CKRecord!
+public struct Member: CKModel {
+    public var record: CKRecord!
 
-    init() {}
+    public init() {}
 
 
     @CKField("name")

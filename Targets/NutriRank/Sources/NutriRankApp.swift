@@ -1,5 +1,6 @@
 import SwiftUI
 import NutriRankUI
+import NutriRankKit
 
 @main
 struct NutriRankApp: App {

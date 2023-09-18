@@ -10,10 +10,10 @@ import Foundation
 import CloudKit
 import Nuvem
 
-struct ChallengeGroup: CKModel {
-    var record: CKRecord!
+public struct ChallengeGroup: CKModel {
+    public var record: CKRecord!
 
-    init() {}
+    public init() {}
 
     @CKField("groupName")
     var groupName: String

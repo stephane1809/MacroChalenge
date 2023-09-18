@@ -7,28 +7,36 @@
 //
 
 import Foundation
-import NutriRankKit
 
 public protocol CreateChallengeGroupUseCase {
-    func execute(requestValue: ChallengeGroupUIModel, completion: @escaping (Result<ChallengeGroupUIModel, Error>) -> Void)
+    func execute(requestValue: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) async
 }
 
 class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
 
     let challengeGroupRepository: ChallengeGroupRepositoryProtocol
+//    let challengeGroupViewModel:
 
     init(challengeGroupRepository: ChallengeGroupRepositoryProtocol) {
         self.challengeGroupRepository = challengeGroupRepository
     }
     
-    func execute(requestValue: ChallengeGroupUIModel, completion: @escaping (Result<ChallengeGroupUIModel, Error>) -> Void) {
-        challengeGroupRepository.createChallengeGroup(group: ChallengeGroup()) { result in
-            switch result {
-            case .success(let group):
-                completion(.success(ChallengeGroupUIModel(name: group.groupName, description: group.description)))
-            case .failure(let error):
-                completion(.failure(error))
-            }
+    func execute(requestValue: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) async {
+        let result  = await challengeGroupRepository.createChallengeGroup(group: requestValue)
+        switch result {
+        case .success(let group):
+            completion(.success(group))
+        case .failure(let error):
+            completion(.failure(error))
         }
+
+//        challengeGroupRepository.createChallengeGroup(group: requestValue) {
+//            switch result {
+//            case .success(let group):
+//                completion(.success(group))
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
     }
 }

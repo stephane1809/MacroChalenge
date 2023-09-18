@@ -46,7 +46,7 @@ extension Project {
         let infoPlist: [String: InfoPlist.Value] = [
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
-"UIMainStoryboardFile": "",
+            "UIMainStoryboardFile": "",
             "UILaunchStoryboardName": "LaunchScreen"
             ]
 

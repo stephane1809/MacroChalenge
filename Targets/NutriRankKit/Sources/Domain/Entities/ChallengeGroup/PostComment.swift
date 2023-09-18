@@ -10,10 +10,10 @@ import Foundation
 import CloudKit
 import Nuvem
 
-struct PostComment: CKModel {
-    var record: CKRecord!
+public struct PostComment: CKModel {
+    public var record: CKRecord!
 
-    init() {}
+    public init() {}
 
     @CKReferenceField("commenter")
     var commenter: Member?
