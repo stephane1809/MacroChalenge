@@ -7,20 +7,20 @@
 //
 
 import Foundation
+import NutriRankKit
 
-protocol ChallengeGroupRepositoryProtocol {
+public protocol ChallengeGroupRepositoryProtocol {
     func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void)
     func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void)
 }
 
 class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
     func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
-        //TODO: retorna um array contendo diversos grupos
+
     }
 
     func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) {
         // cria e salva um grupo no cloud kit
-        
     }
 }
 

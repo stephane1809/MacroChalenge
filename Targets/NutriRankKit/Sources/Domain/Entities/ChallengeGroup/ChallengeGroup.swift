@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import Nuvem
 import CloudKit
+import Nuvem
 
 struct ChallengeGroup: CKModel {
     var record: CKRecord!

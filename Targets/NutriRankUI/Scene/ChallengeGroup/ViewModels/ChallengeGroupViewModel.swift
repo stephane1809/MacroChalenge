@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import NutriRankKit
+//import NutriRankKit
 
 class ChallengeGroupViewModel {
     let challengeGroupUseCase: CreateChallengeGroupUseCase
@@ -16,3 +16,4 @@ class ChallengeGroupViewModel {
         self.challengeGroupUseCase = challengeGroupUseCase
     }
 }
+

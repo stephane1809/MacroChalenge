@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import NutriRankUI
+import NutriRankKit
 
 public protocol CreateChallengeGroupUseCase {
     func execute(requestValue: ChallengeGroupUIModel, completion: @escaping (Result<ChallengeGroupUIModel, Error>) -> Void)
