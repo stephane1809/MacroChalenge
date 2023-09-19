@@ -7,6 +7,11 @@ struct NutriRankApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onAppear {
+                    Task {
+                        await NutriRankKit.test()
+                    }
+                }
         }
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public protocol CreateChallengeGroupUseCase {
-    func execute(requestValue: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) async
+    func execute(requestValue: ChallengeGroup) async -> Result<ChallengeGroup, Error>
 }
 
 class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
@@ -21,13 +21,13 @@ class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
         self.challengeGroupRepository = challengeGroupRepository
     }
     
-    func execute(requestValue: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) async {
+    func execute(requestValue: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
         let result  = await challengeGroupRepository.createChallengeGroup(group: requestValue)
         switch result {
         case .success(let group):
-            completion(.success(group))
+            return .success(group)
         case .failure(let error):
-            completion(.failure(error))
+            return .failure(error)
         }
 
 //        challengeGroupRepository.createChallengeGroup(group: requestValue) {

@@ -1,7 +1,7 @@
 import SwiftUI
 
 public struct ContentView: View {
-    @StateObject var viewmodel = ChallengeGroupViewModel()
+//    @StateObject var viewmodel = ChallengeGroupViewModel()
     public init() {}
 
     public var body: some View {
