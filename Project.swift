@@ -24,6 +24,7 @@ import MyPlugin
 let localHelper = LocalHelper(name: "MyPlugin")
 
 // Creates our project using a helper function defined in ProjectDescriptionHelpers
-let project = Project.app(name: "NutriRank",
-                          platform: .iOS,
-                          additionalTargets: ["NutriRankKit", "NutriRankUI"])
+//let project = Project.app(name: "NutriRank",
+//                          platform: .iOS,
+//                          additionalTargets: ["NutriRankKit", "NutriRankUI"])
+let project = Project.makeCleanArchApp(mainAppTargetName: "NutriRank", mainAppTargetOrganizationName: "Merendeers", iOSTargetVersion: "16.0")
