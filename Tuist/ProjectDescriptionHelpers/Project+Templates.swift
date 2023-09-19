@@ -46,7 +46,7 @@ extension Project {
         let infoPlist: [String: InfoPlist.Value] = [
             "CFBundleShortVersionString": "1.0",
             "CFBundleVersion": "1",
-"UIMainStoryboardFile": "",
+            "UIMainStoryboardFile": "",
             "UILaunchStoryboardName": "LaunchScreen"
             ]
 
@@ -73,4 +73,145 @@ extension Project {
         ])
         return [mainTarget, testTarget]
     }
+}
+
+extension Project {
+
+    public static func makeCleanArchApp(
+        mainAppTargetName: String,
+        mainAppTargetOrganizationName: String,
+        iOSTargetVersion: String
+    ) -> Project {
+
+        let infoPlist: [String: InfoPlist.Value] = [
+            "CFBundleShortVersionString": "1.0",
+            "CFBundleVersion": "1",
+            "UIMainStoryboardFile": "",
+            "UILaunchStoryboardName": "LaunchScreen"
+            ]
+
+        /// Main target is the one Xcode will point to in order to compile
+        /// In this particular method of creating projects, this is the Composional Root
+
+        let mainTarget = Target(
+            name: mainAppTargetName,
+            platform: .iOS,
+            product: .app,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .extendingDefault(with: infoPlist),
+            sources: ["Targets/\(mainAppTargetName)/Sources/**"],
+            resources: ["Targets/\(mainAppTargetName)/Resources/**"],
+            dependencies: [
+                .target(name: "\(mainAppTargetName)Data"),
+                .target(name: "\(mainAppTargetName)Presentation"),
+                .target(name: "\(mainAppTargetName)Domain"),
+
+                /// External frameworks are also declared here.
+                /// IE: .external(name: "Localize"),
+                /// IE: .sdk(name: "CloudKit", type: .framework)
+                /// Refer to the official Tuist documentation for this as my knowledge on external dependencies is limited.
+
+            ]
+        )
+
+        let mainTargetTesting = Target(
+            name: "\(mainAppTargetName)Tests",
+            platform: .iOS,
+            product: .unitTests,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)Tests",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)/Tests/**"],
+            dependencies: [
+                .target(name: "\(mainAppTargetName)")
+        ])
+
+        /// Domain targets.
+        /// Business logic and all that stuff.
+
+        let domainTarget = Target(
+            name: "\(mainAppTargetName)Domain",
+            platform: .iOS,
+            product: .framework,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)Domain",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Domain/Sources/**"],
+            resources: [],
+            dependencies: [])
+
+        let domainTargetTesting = Target(
+            name: "\(mainAppTargetName)DomainTests",
+            platform: .iOS,
+            product: .unitTests,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)DomainTests",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Domain/Tests/**"],
+            resources: [],
+            dependencies: [
+                .target(name: "\(mainAppTargetName)Domain")
+        ])
+
+        /// Presentation and Data layer targets.
+
+        let presentationTarget = Target(
+            name: "\(mainAppTargetName)Presentation",
+            platform: .iOS,
+            product: .framework,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)Presentation",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Presentation/Sources/**"],
+            resources: [],
+            dependencies: [.target(name: "\(mainAppTargetName)Domain")])
+
+        let presentationTargetTesting = Target(
+            name: "\(mainAppTargetName)PresentationTests",
+            platform: .iOS,
+            product: .unitTests,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)PresentationTests",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Presentation/Tests/**"],
+            resources: [],
+            dependencies: [.target(name: "\(mainAppTargetName)Presentation")])
+
+        let dataTarget = Target(
+            name: "\(mainAppTargetName)Data",
+            platform: .iOS,
+            product: .framework,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)Data",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Data/Sources/**"],
+            resources: [],
+            dependencies: [.target(name: "\(mainAppTargetName)Domain")])
+
+        let dataTargetTesting = Target(
+            name: "\(mainAppTargetName)DataTests",
+            platform: .iOS,
+            product: .unitTests,
+            bundleId: "\(mainAppTargetOrganizationName).\(mainAppTargetName)DataTests",
+            deploymentTarget: .iOS(targetVersion: iOSTargetVersion, devices: .iphone),
+            infoPlist: .default,
+            sources: ["Targets/\(mainAppTargetName)Data/Tests/**"],
+            resources: [],
+            dependencies: [.target(name: "\(mainAppTargetName)Data")])
+
+        let targets: [Target] = [mainTarget,
+                                 mainTargetTesting,
+                                 domainTarget,
+                                 domainTargetTesting,
+                                 presentationTarget,
+                                 presentationTargetTesting,
+                                 dataTarget,
+                                 dataTargetTesting
+        ]
+
+        return Project(name: mainAppTargetName, organizationName: mainAppTargetOrganizationName, targets: targets)
+
+    }
+
 }
