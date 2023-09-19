@@ -4,7 +4,6 @@ import SwiftUI
 struct NutriRankApp: App {
     var body: some Scene {
         WindowGroup {
-//            ContentView()
             ChallengeGroupFactory.make()
         }
     }
