@@ -16,8 +16,8 @@ public struct ChallengeGroup: CKModel {
     public init() {}
 
     @CKField("groupName")
-    var groupName: String
+    public var groupName: String
 
     @CKField("description")
-    var description: String
+    public var description: String
 }

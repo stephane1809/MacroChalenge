@@ -8,13 +8,18 @@
 
 import Foundation
 import CloudKit
+import NutriRankDomain
 
-class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
-    func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+public class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
+
+    public init() {}
+
+    public func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+        print("chegou no cliente")
         var groupToSave = ChallengeGroup()
         groupToSave.groupName = group.groupName
         groupToSave.description = group.description
-        let database = CKContainer.default().publicCloudDatabase
+        let database = CKContainer(identifier: "iCloud.NutriRankContainer").publicCloudDatabase
         do {
             try await groupToSave.save(on: database)
             return .success(groupToSave)
@@ -23,7 +28,7 @@ class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
         }
     }
 
-    func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
+    public func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
 
     }
 }

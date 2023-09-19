@@ -8,20 +8,22 @@
 
 import Foundation
 
+
 public protocol CreateChallengeGroupUseCase {
     func execute(requestValue: ChallengeGroup) async -> Result<ChallengeGroup, Error>
 }
 
-class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
+public class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
 
     let challengeGroupRepository: ChallengeGroupRepositoryProtocol
 //    let challengeGroupViewModel:
 
-    init(challengeGroupRepository: ChallengeGroupRepositoryProtocol) {
+    public init(challengeGroupRepository: ChallengeGroupRepositoryProtocol) {
         self.challengeGroupRepository = challengeGroupRepository
     }
     
-    func execute(requestValue: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+    public func execute(requestValue: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+        print("chegou no usecase")
         let result  = await challengeGroupRepository.createChallengeGroup(group: requestValue)
         switch result {
         case .success(let group):
@@ -29,14 +31,5 @@ class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
         case .failure(let error):
             return .failure(error)
         }
-
-//        challengeGroupRepository.createChallengeGroup(group: requestValue) {
-//            switch result {
-//            case .success(let group):
-//                completion(.success(group))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
     }
 }

@@ -8,20 +8,20 @@
 
 import Foundation
 
-protocol ChallengeGroupRepositoryProtocol {
+public protocol ChallengeGroupRepositoryProtocol {
     func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void)
     func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error>
 }
 
-class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
+public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
 
     let data: ChallengeGroupRepositoryProtocol
 
-    init(data: ChallengeGroupRepositoryProtocol) {
+    public init(data: ChallengeGroupRepositoryProtocol) {
         self.data = data
     }
 
-    func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
+    public func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
         
     }
 
@@ -36,7 +36,8 @@ class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
 //        }
 //    }
 
-    func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+    public func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
+        print("chegou no repository")
             let result = await data.createChallengeGroup(group: group)
             switch result {
             case .success(let group):
