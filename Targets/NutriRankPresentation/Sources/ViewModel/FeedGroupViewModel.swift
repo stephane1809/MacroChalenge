@@ -13,15 +13,17 @@ public class FeedGroupViewModel: ObservableObject {
     @Published var groups: [ChallengeGroup] = []
 
     let createUseCase: CreateChallengeGroupUseCase
+    let fetchUseCase: FetchChallengeGroupsUseCase
 
-    public init(createUseCase: CreateChallengeGroupUseCase) {
+    public init(createUseCase: CreateChallengeGroupUseCase, fetchUseCase: FetchChallengeGroupsUseCase) {
         self.createUseCase = createUseCase
+        self.fetchUseCase = fetchUseCase
     }
 
     func createGroup() async {
         print("chegou na viewmodel")
         var group = ChallengeGroup()
-        group.groupName = "mim de papai"
+        group.groupName = "deu de novo"
         group.description = "testando"
         let result = await createUseCase.execute(requestValue: group)
         switch result {
@@ -32,5 +34,20 @@ public class FeedGroupViewModel: ObservableObject {
         case .failure(let error):
             print(error)
         }
+    }
+
+    func fetchGroup() async {
+        print("o fetch chegou na viewmodel")
+        let result = await fetchUseCase.execute()
+        switch result {
+            case .success(let groupList):
+                DispatchQueue.main.async {
+                    self.groups = groupList
+                }
+            case .failure(let error):
+                print(error)
+        }
+
+
     }
 }
