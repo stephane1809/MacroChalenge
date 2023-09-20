@@ -27,4 +27,4 @@ let localHelper = LocalHelper(name: "MyPlugin")
 //let project = Project.app(name: "NutriRank",
 //                          platform: .iOS,
 //                          additionalTargets: ["NutriRankKit", "NutriRankUI"])
-let project = Project.makeCleanArchApp(mainAppTargetName: "NutriRank", mainAppTargetOrganizationName: "Merendeers", iOSTargetVersion: "16.0")
+let project = Project.makeCleanArchApp(mainAppTargetName: "NutriRank", mainAppTargetOrganizationName: "com.merendeers", iOSTargetVersion: "16.0")
