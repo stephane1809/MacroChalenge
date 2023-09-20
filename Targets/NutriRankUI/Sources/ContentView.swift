@@ -3,47 +3,19 @@ import UIKit
 import Foundation
 
 public struct ContentView: View {
-
     public init() {}
 
-    @State private var sourceType: UIImagePickerController.SourceType = .photoLibrary
-    @State private var selectedImage: UIImage?
-    @State private var isImagePickerDisplay = false
-
     public var body: some View {
-        NavigationView {
-            VStack {
+//        Text("Hello")
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 0.0){
 
-                if selectedImage != nil {
-                    Image(uiImage: selectedImage!)
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .frame(width: 300, height: 300)
-                } else {
-                    Image(systemName: "snow")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .clipShape(Circle())
-                        .frame(width: 300, height: 300)
-                }
-
-                Button("Camera") {
-                    self.sourceType = .camera
-                    self.isImagePickerDisplay.toggle()
-                }.padding()
-
-                Button("photo") {
-                    self.sourceType = .photoLibrary
-                    self.isImagePickerDisplay.toggle()
-                }.padding()
+                    Rectangle()
+                        .fill(.purple)
+                        .containerRelativeFrame([.horizontal, .vertical])
             }
-            .navigationBarTitle("Demo")
-            .sheet(isPresented: self.$isImagePickerDisplay) {
-                ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
-            }
-
         }
+
     }
 
 }
