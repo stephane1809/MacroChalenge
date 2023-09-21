@@ -39,7 +39,7 @@ public struct CreateGroupView: View {
                             .aspectRatio(contentMode: .fit)
                             .scaledToFill()
                             .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
-                            .background(.green)
+                            .background(Color("Green"))
                             .cornerRadius(10)
                     }
 
