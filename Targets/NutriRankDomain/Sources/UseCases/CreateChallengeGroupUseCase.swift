@@ -16,7 +16,6 @@ public protocol CreateChallengeGroupUseCase {
 public class DefaultCreateChallengeGroupUseCase: CreateChallengeGroupUseCase {
 
     let challengeGroupRepository: ChallengeGroupRepositoryProtocol
-//    let challengeGroupViewModel:
 
     public init(challengeGroupRepository: ChallengeGroupRepositoryProtocol) {
         self.challengeGroupRepository = challengeGroupRepository

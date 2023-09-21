@@ -28,7 +28,17 @@ public class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
         }
     }
 
-    public func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
+    public func fetchChallengeGroups() async -> Result<[NutriRankDomain.ChallengeGroup], Error> {
+        print("fetch chegou no cliente")
+        let database = CKContainer(identifier:"iCloud.NutriRankContainer").publicCloudDatabase
+        do{
+            let result = try await ChallengeGroup.query(on: database).all()
+            return(.success(result))
 
+        } catch {
+            return(.failure(error))
+        }
     }
+
+    
 }

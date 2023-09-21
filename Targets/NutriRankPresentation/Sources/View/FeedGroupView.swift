@@ -20,9 +20,9 @@ public struct FeedGroupView: View {
         VStack {
             Button {
                 Task {
-                    await viewmodel.createGroup()
+                    await viewmodel.fetchGroup()
                 }
-                print("chegou na view")
+                print("\(viewmodel.groups)")
             } label: {
                 Text("Criar grupo")
             }

@@ -16,8 +16,9 @@ struct ChallengeGroupFactory {
     static func make() -> some View {
         let data = NutriRankNuvemClient()
         let repository = DefaultChallengeGroupRepository(data: data)
-        let useCase = DefaultCreateChallengeGroupUseCase(challengeGroupRepository: repository)
-        let viewmodel = FeedGroupViewModel(createUseCase: useCase)
+        let createUseCase = DefaultCreateChallengeGroupUseCase(challengeGroupRepository: repository)
+        let fetchUseCase = DefaultFetchGroupsUseCase(challengeGroupRepository: repository)
+        let viewmodel = FeedGroupViewModel(createUseCase: createUseCase, fetchUseCase: fetchUseCase)
         return FeedGroupView(viewmodel: viewmodel)
     }
 }
