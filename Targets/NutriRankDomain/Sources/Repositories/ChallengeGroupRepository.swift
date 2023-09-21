@@ -9,8 +9,9 @@
 import Foundation
 
 public protocol ChallengeGroupRepositoryProtocol {
-    func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void)
+    func fetchChallengeGroups() async -> Result<[ChallengeGroup], Error>
     func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error>
+    func deleteChallengeRepository(group: ChallengeGroup) async -> Result<Bool, Error>
 }
 
 public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
@@ -21,20 +22,17 @@ public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
         self.data = data
     }
 
-    public func fetchChallengeGroups(completion: @escaping (Result<[ChallengeGroup], Error>) -> Void) {
-        
+    public func fetchChallengeGroups() async -> Result<[ChallengeGroup], Error> {
+        print("fetch chegou no repository")
+        let result = await data.fetchChallengeGroups()
+        switch result {
+            case .success(let groupList):
+                return .success(groupList) 
+            case .failure(let error):
+                return .failure(error)
+        }
     }
 
-//    func createChallengeGroup(group: ChallengeGroup, completion: @escaping (Result<ChallengeGroup, Error>) -> Void) {
-//        client.createChallengeGroup(group: group) { result in
-//            switch result {
-//            case .success(let group):
-//                completion(.success(group))
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
 
     public func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error> {
         print("chegou no repository")
@@ -45,6 +43,17 @@ public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
             case .failure(let error):
                 return .failure(error)
             }
+    }
+
+    public func deleteChallengeRepository(group: ChallengeGroup) async -> Result<Bool, Error> {
+        print("delete chegou no repository")
+        let result = await data.deleteChallengeRepository(group: group)
+        switch result {
+            case .success(let bool):
+                return .success(bool)
+            case .failure(let error):
+                return .failure(error)
+        }
     }
 }
 

@@ -18,9 +18,11 @@ struct ChallengeGroupFactory {
         let dataPost = NutriRankClientPosts()
         let repository = DefaultChallengeGroupRepository(data: data)
         let postRepository = DefaultChallengePostRepository(data: dataPost)
-        let useCase = DefaultCreateChallengeGroupUseCase(challengeGroupRepository: repository)
+        let createUseCase = DefaultCreateChallengeGroupUseCase(challengeGroupRepository: repository)
+        let fetchUseCase = DefaultFetchGroupsUseCase(challengeGroupRepository: repository)
+        let deleteUseCase = DefaultDeleteChallengeGroupUseCase(challengeGroupRepository: repository)
         let postUseCase = DefaultCreateChallengePostUseCase(repository: postRepository)
-        let viewmodel = FeedGroupViewModel(createUseCase: useCase, createPostUseCase: postUseCase)
+        let viewmodel = FeedGroupViewModel(createUseCase: createUseCase, fetchUseCase: fetchUseCase, deleteUseCase: deleteUseCase, createPostUseCase: postUseCase)
         return FeedGroupView(viewmodel: viewmodel)
     }
 }

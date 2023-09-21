@@ -15,10 +15,14 @@ public class FeedGroupViewModel: ObservableObject {
 
     let createUseCase: CreateChallengeGroupUseCase
     let createPostUseCase: CreateChallengePostUseCase
+    let fetchUseCase: FetchChallengeGroupsUseCase
+    let deleteUseCase: DeleteChallengeGroupUseCase
 
-    public init(createUseCase: CreateChallengeGroupUseCase, createPostUseCase: CreateChallengePostUseCase) {
+    public init(createUseCase: CreateChallengeGroupUseCase, createPostUseCase: CreateChallengePostUseCase, fetchUseCase: FetchChallengeGroupsUseCase, deleteUseCase: DeleteChallengeGroupUseCase) {
         self.createUseCase = createUseCase
         self.createPostUseCase = createPostUseCase
+        self.fetchUseCase = fetchUseCase
+        self.deleteUseCase = deleteUseCase
     }
 
     func createGroup(groupName: String, description: String) async {
@@ -37,6 +41,30 @@ public class FeedGroupViewModel: ObservableObject {
         }
     }
 
+    func fetchGroup() async {
+        print("o fetch chegou na viewmodel")
+        let result = await fetchUseCase.execute()
+        switch result {
+            case .success(let groupList):
+                DispatchQueue.main.async {
+                    self.groups = groupList
+                }
+            case .failure(let error):
+                print(error)
+        }
+    }
+
+    func deleteGroup(group: ChallengeGroup) async {
+        print("o delete chegou na viewmodel")
+        let result = await deleteUseCase.execute(group: group)
+        switch result {
+            case .success(let bool):
+                print(bool)
+            case .failure(let error):
+                print(error)
+        }
+    }
+    
     func createPost(title: String, description: String) async {
         var post = Post()
         post.description = description
