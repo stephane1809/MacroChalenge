@@ -21,10 +21,26 @@ public struct FeedGroupView: View {
             Button {
                 Task {
                     await viewmodel.fetchGroup()
+                    print(viewmodel.groups.count)
                 }
-                print("\(viewmodel.groups)")
+//                print("\(viewmodel.groups.first)")
             } label: {
                 Text("Criar grupo")
+            }
+
+            Button {
+                Task {
+                    for group in viewmodel.groups {
+                        print(group)
+                        await viewmodel.deleteGroup(group:group)
+                    }
+                }
+//                let groupToDelete = viewmodel.groupxs[0]
+//                print(groupToDelete)
+
+//                print("\(viewmodel.groups)")
+            } label: {
+                Text("deletar grupo")
             }
         }
     }

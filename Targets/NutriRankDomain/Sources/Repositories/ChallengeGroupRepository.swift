@@ -11,10 +11,10 @@ import Foundation
 public protocol ChallengeGroupRepositoryProtocol {
     func fetchChallengeGroups() async -> Result<[ChallengeGroup], Error>
     func createChallengeGroup(group: ChallengeGroup) async -> Result<ChallengeGroup, Error>
+    func deleteChallengeRepository(group: ChallengeGroup) async -> Result<Bool, Error>
 }
 
 public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
-
 
     let data: ChallengeGroupRepositoryProtocol
 
@@ -30,8 +30,6 @@ public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
                 return .success(groupList) 
             case .failure(let error):
                 return .failure(error)
-
-
         }
     }
 
@@ -45,6 +43,17 @@ public class DefaultChallengeGroupRepository: ChallengeGroupRepositoryProtocol {
             case .failure(let error):
                 return .failure(error)
             }
+    }
+
+    public func deleteChallengeRepository(group: ChallengeGroup) async -> Result<Bool, Error> {
+        print("delete chegou no repository")
+        let result = await data.deleteChallengeRepository(group: group)
+        switch result {
+            case .success(let bool):
+                return .success(bool)
+            case .failure(let error):
+                return .failure(error)
+        }
     }
 }
 
