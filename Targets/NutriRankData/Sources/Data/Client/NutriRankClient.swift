@@ -6,11 +6,14 @@
 //  Copyright © 2023 Merendeers. All rights reserved.
 //
 
+
+
 import Foundation
 import CloudKit
 import NutriRankDomain
 
 public class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
+
 
     public init() {}
 
@@ -40,5 +43,17 @@ public class NutriRankNuvemClient: ChallengeGroupRepositoryProtocol {
         }
     }
 
-    
+    public func deleteChallengeRepository(group: NutriRankDomain.ChallengeGroup) async -> Result<Bool, Error> {
+        print("delete chegou no client")
+        let database = CKContainer(identifier: "iCloud.NutriRankContainer").publicCloudDatabase
+        do {
+            try await group.delete(on: database)
+            return .success(true)
+        } catch {
+            return .failure(error)
+        }
+    }
+
+
+
 }

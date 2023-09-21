@@ -14,10 +14,12 @@ public class FeedGroupViewModel: ObservableObject {
 
     let createUseCase: CreateChallengeGroupUseCase
     let fetchUseCase: FetchChallengeGroupsUseCase
+    let deleteUseCase: DeleteChallengeGroupUseCase
 
-    public init(createUseCase: CreateChallengeGroupUseCase, fetchUseCase: FetchChallengeGroupsUseCase) {
+    public init(createUseCase: CreateChallengeGroupUseCase, fetchUseCase: FetchChallengeGroupsUseCase, deleteUseCase: DeleteChallengeGroupUseCase) {
         self.createUseCase = createUseCase
         self.fetchUseCase = fetchUseCase
+        self.deleteUseCase = deleteUseCase
     }
 
     func createGroup() async {
@@ -47,7 +49,16 @@ public class FeedGroupViewModel: ObservableObject {
             case .failure(let error):
                 print(error)
         }
+    }
 
-
+    func deleteGroup(group: ChallengeGroup) async {
+        print("o delete chegou na viewmodel")
+        let result = await deleteUseCase.execute(group: group)
+        switch result {
+            case .success(let bool):
+                print(bool)
+            case .failure(let error):
+                print(error)
+        }
     }
 }
