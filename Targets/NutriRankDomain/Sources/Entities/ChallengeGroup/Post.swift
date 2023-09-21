@@ -16,18 +16,21 @@ public struct Post: CKModel {
     public init() {}
 
     @CKField("title")
-    var title: String
+    public var title: String
 
     @CKField("description")
-    var description: String
+    public var description: String
 
     @CKField("upVote")
-    var upVote: Int
+    public var upVote: Int
 
     @CKField("downVote")
-    var downVote: Int
+    public var downVote: Int
 
     @CKField("image")
-    var image: String
+    public var image: String
+
+    @CKReferenceField("owner")
+    public var owner: Member?
 
 }

@@ -15,9 +15,12 @@ import SwiftUI
 struct ChallengeGroupFactory {
     static func make() -> some View {
         let data = NutriRankNuvemClient()
+        let dataPost = NutriRankClientPosts()
         let repository = DefaultChallengeGroupRepository(data: data)
+        let postRepository = DefaultChallengePostRepository(data: dataPost)
         let useCase = DefaultCreateChallengeGroupUseCase(challengeGroupRepository: repository)
-        let viewmodel = FeedGroupViewModel(createUseCase: useCase)
+        let postUseCase = DefaultCreateChallengePostUseCase(repository: postRepository)
+        let viewmodel = FeedGroupViewModel(createUseCase: useCase, createPostUseCase: postUseCase)
         return FeedGroupView(viewmodel: viewmodel)
     }
 }
