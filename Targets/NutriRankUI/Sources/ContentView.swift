@@ -12,12 +12,10 @@ public struct ContentView: View {
 
                     Rectangle()
                         .fill(.purple)
-                        .containerRelativeFrame([.horizontal, .vertical])
+//                        .containerRelativeFrame([.horizontal, .vertical])
             }
         }
-
     }
-
 }
 
 

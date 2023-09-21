@@ -26,122 +26,123 @@ public struct CreateGroupView: View {
     public var body: some View {
 
         GeometryReader { metrics in
-            NavigationView {
-                VStack (spacing: 40) {
-                    VStack(spacing: 1) {
-                        if selectedImage != nil {
-                            Image(uiImage: selectedImage!)
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .clipShape(Rectangle())
-                                .scaledToFill()
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
-                                .cornerRadius(10)
-                                .containerRelativeFrame([.horizontal])
-                        } else {
-                            Image(systemName: "camera.fill").font(.system(size: 37, weight: .regular))
-                                .aspectRatio(contentMode: .fit)
-                                .scaledToFill()
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
+                NavigationView {
+                    ScrollView {
+                        VStack (spacing: 40) {
+                            VStack(spacing: 1) {
+                                if selectedImage != nil {
+                                    Image(uiImage: selectedImage!)
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fit)
+                                        .clipShape(Rectangle())
+                                        .scaledToFill()
+                                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
+                                        .cornerRadius(10)
+                                        .containerRelativeFrame([.horizontal])
+                                } else {
+                                    Image(systemName: "camera.fill").font(.system(size: 37, weight: .regular))
+                                        .aspectRatio(contentMode: .fit)
+                                        .scaledToFill()
+                                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
+                                        .background(Color("Green"))
+                                        .cornerRadius(10)
+                                }
+
+                                Button("Editar imagem") {
+                                    self.isImagePickerDisplay.toggle()
+                                }.padding()
+
+                            }
+                            .actionSheet(isPresented: $isImagePickerDisplay) {
+                                ActionSheet(
+                                    title: Text("Escolha uma opção"),
+                                    buttons:[
+                                        .default(
+                                            Text("Câmera"),
+                                            action: {
+                                                self.sourceType = .camera
+                                                self.isImagePickerDisplay2 = true
+                                            }
+                                        ),
+                                        .default(
+                                            Text("Galeria"),
+                                            action: {
+                                                self.sourceType = .photoLibrary
+                                                self.isImagePickerDisplay2 = true
+                                            }
+                                        ),
+                                        .cancel()
+                                    ]
+                                )
+                            }
+                            .sheet(isPresented: self.$isImagePickerDisplay2) {
+                                ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
+                            }
+
+                            VStack (spacing: 20) {
+                                VStack (spacing: 2) {
+                                    HStack {
+                                        Image(systemName: "person.2.fill")
+                                        Text("Grupo")
+                                        Spacer()
+                                    }
+                                    TextField("Nome do grupo", text: $nameGroup)
+
+                                }
+                                .padding(.horizontal, 20)
+                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
                                 .background(Color("Green"))
                                 .cornerRadius(10)
-                        }
 
-                        Button("Editar imagem") {
-                            self.isImagePickerDisplay.toggle()
-                        }.padding()
-
-                    }
-                    .actionSheet(isPresented: $isImagePickerDisplay) {
-                        ActionSheet(
-                            title: Text("Escolha uma opção"),
-                            buttons:[
-                                .default(
-                                    Text("Câmera"),
-                                    action: {
-                                        self.sourceType = .camera
-                                        self.isImagePickerDisplay2 = true
+                                VStack (spacing: 2) {
+                                    HStack {
+                                        Image(systemName: "pencil")
+                                        Text("Descrição")
+                                        Spacer()
                                     }
-                                ),
-                                .default(
-                                    Text("Galeria"),
-                                    action: {
-                                        self.sourceType = .photoLibrary
-                                        self.isImagePickerDisplay2 = true
+                                    TextField("Descrição do grupo", text: $descrptionGroup)
+
+                                }
+                                .padding(.horizontal, 20)
+                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .background(Color("Green"))
+                                .cornerRadius(10)
+
+                                VStack (spacing: 2){
+                                    HStack {
+                                        Image(systemName: "pencil")
+                                        Text("Descrição")
+                                        Spacer()
                                     }
-                                ),
-                                .cancel()
-                            ]
-                        )
-                    }
-                    .sheet(isPresented: self.$isImagePickerDisplay2) {
-                        ImagePickerView(selectedImage: self.$selectedImage, sourceType: self.sourceType)
-                    }
+                                    TextField("Descrição do grupo", text: $descrptionGroup)
 
-                    VStack (spacing: 25) {
-                        VStack {
-                            HStack {
-                                Image(systemName: "person.2.fill")
-                                Text("Grupo")
-                                Spacer()
+                                }
+                                .padding(.horizontal, 20)
+                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .background(Color("Green"))
+                                .cornerRadius(10)
+
+                                VStack (spacing: 2){
+                                    HStack {
+                                        Image(systemName: "flame.fill")
+                                        Text("Regras")
+                                        Spacer()
+                                    }
+                                    TextField("Regras do grupo", text: $rulesGroup)
+
+                                }
+                                .padding(.horizontal, 20)
+                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .background(Color("Green"))
+                                .cornerRadius(10)
                             }
-                            TextField("Nome do grupo", text: $nameGroup)
-
+                            Spacer()
                         }
-                        .padding(.horizontal, 20)
-                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.10)
-                        .background(Color("Green"))
-                        .cornerRadius(10)
-
-                        VStack {
-                            HStack {
-                                Image(systemName: "pencil")
-                                Text("Descrição")
-                                Spacer()
-                            }
-                            TextField("Descrição do grupo", text: $descrptionGroup)
-
-                        }
-                        .padding(.horizontal, 20)
-                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.10)
-                        .background(Color("Green"))
-                        .cornerRadius(10)
-
-                        VStack {
-                            HStack {
-                                Image(systemName: "pencil")
-                                Text("Descrição")
-                                Spacer()
-                            }
-                            TextField("Descrição do grupo", text: $descrptionGroup)
-
-                        }
-                        .padding(.horizontal, 20)
-                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.10)
-                        .background(Color("Green"))
-                        .cornerRadius(10)
-
-                        VStack {
-                            HStack {
-                                Image(systemName: "flame.fill")
-                                Text("Regras")
-                                Spacer()
-                            }
-                            TextField("Regras do grupo", text: $rulesGroup)
-
-                        }
-                        .padding(.horizontal, 20)
-                        .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.10)
-                        .background(Color("Green"))
-                        .cornerRadius(10)
                     }
 
-
-                    Spacer()
+                    .navigationBarTitle("Demo")
+    //                .background(.blue)
                 }
-                .navigationBarTitle("Demo")
-//                .background(.blue)
-            }
 
         }
         .navigationViewStyle(.stack)
