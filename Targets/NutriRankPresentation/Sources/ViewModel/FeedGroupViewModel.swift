@@ -18,7 +18,10 @@ public class FeedGroupViewModel: ObservableObject {
     let fetchUseCase: FetchChallengeGroupsUseCase
     let deleteUseCase: DeleteChallengeGroupUseCase
 
-    public init(createUseCase: CreateChallengeGroupUseCase, createPostUseCase: CreateChallengePostUseCase, fetchUseCase: FetchChallengeGroupsUseCase, deleteUseCase: DeleteChallengeGroupUseCase) {
+    public init(createUseCase: CreateChallengeGroupUseCase,
+                createPostUseCase: CreateChallengePostUseCase,
+                fetchUseCase: FetchChallengeGroupsUseCase,
+                deleteUseCase: DeleteChallengeGroupUseCase) {
         self.createUseCase = createUseCase
         self.createPostUseCase = createPostUseCase
         self.fetchUseCase = fetchUseCase

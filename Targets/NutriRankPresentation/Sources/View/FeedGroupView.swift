@@ -14,35 +14,56 @@ public struct FeedGroupView: View {
     @ObservedObject var viewmodel: FeedGroupViewModel
 
     @State var isPresented: Bool = false
+    @State var isActive: Bool = false
+    @State var groupName: String = ""
 
     public init(viewmodel: FeedGroupViewModel) {
         self.viewmodel = viewmodel
     }
 
     public var body: some View {
-        VStack {
-            if viewmodel.groups.isEmpty {
-                Button {
-                    isPresented.toggle()
-                } label: {
-                    Text("Criar grupo")
-                }.buttonStyle(.borderedProminent)
-                    .sheet(isPresented: $isPresented) {
-                        CreateGroupView(viewModel: viewmodel)
-                    }
-            } else {
-                List(viewmodel.groups) { group in
-                    NavigationLink(destination: GroupView(viewmodel: viewmodel)) {
-                        Text(group.groupName)
+        NavigationStack {
+            VStack {
+                ScrollView(.horizontal) {
+                    LazyHStack(alignment: .top) {
+                        Button("\(groupName)") {
+                            isActive.toggle()
+                            print("passou")
+                        }.buttonStyle(NutriRankGroupButton(isActive: $isActive))
+                    }.padding()
+                }.scrollIndicators(.hidden)
+            }.onAppear {
+                Task {
+                    if viewmodel.groups.isEmpty {
+                        await viewmodel.fetchGroup()
+                        groupName = viewmodel.groups[0].groupName
                     }
                 }
-            }
+            }.navigationTitle("NUTRIRANK")
+
         }
     }
 }
 
+struct NutriRankGroupButton: ButtonStyle {
+
+    @Binding var isActive: Bool
+
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .padding()
+            .background(
+                RoundedRectangle(
+                    cornerRadius: 12,
+                    style: .continuous)
+                .stroke($isActive.wrappedValue ? Color(.black) : Color(.red)).background(Color("lightBlue"))
+            )
+            .foregroundColor(.black)
+    }
+}
+
 struct GroupView: View {
-    
+
     @ObservedObject var viewmodel: FeedGroupViewModel
 
     @State var title: String = ""
