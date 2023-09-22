@@ -10,6 +10,8 @@ import Foundation
 import SwiftUI
 import UIKit
 
+
+
 public struct CreateGroupView: View {
 
     public init() {}
@@ -29,6 +31,7 @@ public struct CreateGroupView: View {
                 NavigationView {
                     ScrollView {
                         VStack (spacing: 40) {
+
                             VStack(spacing: 1) {
                                 if selectedImage != nil {
                                     Image(uiImage: selectedImage!)
@@ -80,73 +83,87 @@ public struct CreateGroupView: View {
                             }
 
                             VStack (spacing: 20) {
+
                                 VStack (spacing: 2) {
+
                                     HStack {
                                         Image(systemName: "person.2.fill")
                                         Text("Grupo")
                                         Spacer()
                                     }
-                                    TextField("Nome do grupo", text: $nameGroup)
 
+                                    TextField("Nome do grupo", text: $nameGroup)
                                 }
+
                                 .padding(.horizontal, 20)
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .padding(.vertical, 12)
+                                .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(Color("Green"))
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2) {
+
                                     HStack {
                                         Image(systemName: "pencil")
                                         Text("Descrição")
                                         Spacer()
                                     }
-                                    TextField("Descrição do grupo", text: $descrptionGroup)
 
+                                    TextField("Descrição do grupo", text: $descrptionGroup)
                                 }
                                 .padding(.horizontal, 20)
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .padding(.vertical, 12)
+                                .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(Color("Green"))
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2){
+
                                     HStack {
-                                        Image(systemName: "pencil")
-                                        Text("Descrição")
+                                        Image(systemName: "stopwatch.fill")
+                                        Text("Duração")
                                         Spacer()
                                     }
-                                    TextField("Descrição do grupo", text: $descrptionGroup)
 
+                                    TextField("Dias de duração do desafio", text: $descrptionGroup)
                                 }
                                 .padding(.horizontal, 20)
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .padding(.vertical, 12)
+                                .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(Color("Green"))
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2){
+
                                     HStack {
                                         Image(systemName: "flame.fill")
                                         Text("Regras")
                                         Spacer()
                                     }
-                                    TextField("Regras do grupo", text: $rulesGroup)
 
+                                    TextField("Regras do grupo", text: $rulesGroup, axis: .vertical)
+                                        .lineLimit(1...10)
                                 }
                                 .padding(.horizontal, 20)
-                                .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.09)
+                                .padding(.vertical, 12)
+                                .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(Color("Green"))
                                 .cornerRadius(10)
                             }
+
                             Spacer()
                         }
+
+                    }
+                    .onTapGesture {
+                        self.hideKeyboard()
                     }
 
-                    .navigationBarTitle("Demo")
+                    .navigationBarTitle("Criar grupo")
     //                .background(.blue)
                 }
-
         }
         .navigationViewStyle(.stack)
-
     }
 
 }
