@@ -23,6 +23,8 @@ public struct CreateGroupView: View {
     @State private var nameGroup = ""
     @State private var descrptionGroup = ""
     @State private var rulesGroup = ""
+    @State private var selectDateInit: Date = Date()
+    @State private var selectDateFinal: Date = Date()
 
 
     public var body: some View {
@@ -124,8 +126,8 @@ public struct CreateGroupView: View {
                                         Text("Duração")
                                         Spacer()
                                     }
-
-                                    TextField("Dias de duração do desafio", text: $descrptionGroup)
+                                    DatePicker("Início:", selection: $selectDateInit)
+                                    DatePicker("Fim:", selection: $selectDateFinal)
                                 }
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
