@@ -33,7 +33,6 @@ public struct CreateGroupView: View {
             NavigationView {
                     ScrollView {
                         VStack (spacing: 40) {
-
                             VStack(spacing: 1) {
                                 if selectedImage != nil {
                                     Image(uiImage: selectedImage!)
@@ -186,11 +185,7 @@ public struct CreateGroupView: View {
                         self.hideKeyboard()
                     }
                     .navigationTitle("Criar grupo")
-
-
                 }
-
-
         }
 
         .navigationViewStyle(.stack)
