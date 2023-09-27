@@ -3,6 +3,7 @@ import UIKit
 import Foundation
 
 public struct ContentView: View {
+//    @StateObject var viewmodel = ChallengeGroupViewModel()
     public init() {}
 
     public var body: some View {
