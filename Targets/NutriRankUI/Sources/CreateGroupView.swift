@@ -104,6 +104,7 @@ public struct CreateGroupView: View {
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(.white)
                                 .cornerRadius(10)
+                                .shadow(radius: 1, x: 0, y: 1)
 
                                 VStack (spacing: 2) {
 
@@ -120,6 +121,7 @@ public struct CreateGroupView: View {
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(.white)
                                 .cornerRadius(10)
+                                .shadow(radius: 1, x: 0, y: 1)
 
                                 VStack (spacing: 2){
 
@@ -129,13 +131,16 @@ public struct CreateGroupView: View {
                                         Spacer()
                                     }
                                     DatePicker("Início:", selection: $selectDateInit)
+                                    Spacer()
                                     DatePicker("Fim:", selection: $selectDateFinal)
+
                                 }
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(.white)
                                 .cornerRadius(10)
+                                .shadow(radius: 1, x: 0, y: 1)
 
                                 VStack (spacing: 2){
 
@@ -153,6 +158,7 @@ public struct CreateGroupView: View {
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
                                 .background(.white)
                                 .cornerRadius(10)
+                                .shadow(radius: 1, x: 0, y: 1)
 
                                 Spacer()
 
@@ -169,18 +175,18 @@ public struct CreateGroupView: View {
                                 .buttonStyle(.bordered)
 
                             }
-
+                            .frame(maxWidth: .infinity)
                             Spacer()
                         }
 
                     }
-//                    .background(.blue)
-//                    .ignoresSafeArea()
+                    .frame(maxWidth: .infinity)
+                    .background(Color("Light blue"))
                     .onTapGesture {
                         self.hideKeyboard()
                     }
                     .navigationTitle("Criar grupo")
-//                    .navigationBarBackButtonHidden()
+
 
                 }
 
