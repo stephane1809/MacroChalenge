@@ -30,7 +30,7 @@ public struct CreateGroupView: View {
     public var body: some View {
 
         GeometryReader { metrics in
-                NavigationView {
+            NavigationView {
                     ScrollView {
                         VStack (spacing: 40) {
 
@@ -55,7 +55,9 @@ public struct CreateGroupView: View {
 
                                 Button("Editar imagem") {
                                     self.isImagePickerDisplay.toggle()
-                                }.padding()
+                                }
+                                .padding()
+                                .font(.headline)
 
                             }
                             .actionSheet(isPresented: $isImagePickerDisplay) {
@@ -100,7 +102,7 @@ public struct CreateGroupView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
-                                .background(Color("Green"))
+                                .background(.white)
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2) {
@@ -116,7 +118,7 @@ public struct CreateGroupView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
-                                .background(Color("Green"))
+                                .background(.white)
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2){
@@ -132,7 +134,7 @@ public struct CreateGroupView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
-                                .background(Color("Green"))
+                                .background(.white)
                                 .cornerRadius(10)
 
                                 VStack (spacing: 2){
@@ -149,23 +151,44 @@ public struct CreateGroupView: View {
                                 .padding(.horizontal, 20)
                                 .padding(.vertical, 12)
                                 .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
-                                .background(Color("Green"))
+                                .background(.white)
                                 .cornerRadius(10)
+
+                                Spacer()
+
+                                Button {
+
+                                } label: {
+                                    Text("Criar grupo")
+                                        .font(.headline)
+                                        .frame(width: 125, height: 35)
+                                        .foregroundColor(.white)
+                                }
+                                .background(.blue)
+                                .cornerRadius(10)
+                                .buttonStyle(.bordered)
+
                             }
 
                             Spacer()
                         }
 
                     }
+//                    .background(.blue)
+//                    .ignoresSafeArea()
                     .onTapGesture {
                         self.hideKeyboard()
                     }
+                    .navigationTitle("Criar grupo")
+//                    .navigationBarBackButtonHidden()
 
-                    .navigationBarTitle("Criar grupo")
-    //                .background(.blue)
                 }
+
+
         }
+
         .navigationViewStyle(.stack)
+
     }
 
 }
