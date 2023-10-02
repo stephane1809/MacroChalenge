@@ -1,21 +1,12 @@
 import SwiftUI
-import UIKit
-import Foundation
 
 public struct ContentView: View {
 //    @StateObject var viewmodel = ChallengeGroupViewModel()
     public init() {}
 
     public var body: some View {
-//        Text("Hello")
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 0.0){
-
-                    Rectangle()
-                        .fill(.purple)
-//                        .containerRelativeFrame([.horizontal, .vertical])
-            }
-        }
+        Text("Hello, World!")
+            .padding()
     }
 }
 
