@@ -16,57 +16,63 @@ public struct EmptyStateView: View {
     public var body: some View {
         GeometryReader { metrics in
             NavigationView {
-                VStack (spacing: 110) {
-                    VStack {
-                        Image("logo")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .clipShape(Rectangle())
-                            .scaledToFill()
-                            .frame(width: metrics.size.width * 0.6, height: metrics.size.height * 0.25)
-                    }
+                ZStack {
+                    Color("Light blue")
+                        .ignoresSafeArea()
 
-                    VStack (alignment: .leading) {
-                        HStack {
-                            Image(systemName: "person.crop.circle.fill.badge.plus").font(.system(size: 18, weight: .regular))
+                    VStack (spacing: 50) {
+                        VStack {
+                            Image("logo")
+                                .resizable()
                                 .aspectRatio(contentMode: .fit)
+                                .clipShape(Rectangle())
                                 .scaledToFill()
-
-                            Text ("Crie um grupo")
-                                .font(.headline)
+                                .frame(width: metrics.size.width * 0.6, height: metrics.size.height * 0.25)
                         }
-                        Text("Você não possui grupos no momento. Crie num novo grupo e inicie novos hábitos alimentares com seus amigos!")
-                    }
-                    .padding(.horizontal, 15)
-                    .padding(.vertical, 12)
-                    .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
-                    .background(.white)
-                    .cornerRadius(10)
-                    .shadow(radius: 1, x: 0, y: 1)
 
+                        VStack (alignment: .leading) {
+                            HStack {
+                                Image(systemName: "person.crop.circle.fill.badge.plus").font(.system(size: 18, weight: .regular))
+                                    .aspectRatio(contentMode: .fit)
+                                    .scaledToFill()
 
-                    VStack {
-                        Button {
-
-                        } label: {
-                            HStack (alignment: .center){
-                                Image(systemName: "person.crop.circle.fill.badge.plus")
-                                    .foregroundColor(.white)
-
-                                Text("Criar grupo")
+                                Text ("Crie um grupo")
                                     .font(.headline)
-
-                                    .foregroundColor(.white)
                             }
-                            .frame(width: 150, height: 35)
+                            Text("Você não possui grupos no momento. Crie num novo grupo e inicie novos hábitos alimentares com seus amigos!")
                         }
-                        .background(Color("Red"))
+                        .padding(.horizontal, 15)
+                        .padding(.vertical, 12)
+                        .frame(maxWidth: metrics.size.width * 0.92, minHeight: metrics.size.height * 0.09)
+                        .background(.white)
                         .cornerRadius(10)
-                        .buttonStyle(.bordered)
+                        .shadow(radius: 1, x: 0, y: 1)
+
+
+                        VStack {
+                            Button {
+
+                            } label: {
+                                HStack (alignment: .center){
+                                    Image(systemName: "person.crop.circle.fill.badge.plus")
+                                        .foregroundColor(.white)
+
+                                    Text("Criar grupo")
+                                        .font(.headline)
+
+                                        .foregroundColor(.white)
+                                }
+                                .frame(width: 150, height: 35)
+                            }
+                            .background(Color("Red"))
+                            .cornerRadius(10)
+                            .buttonStyle(.bordered)
+                        }
+
                     }
                 }
-                .frame(maxWidth: .infinity)
-                .background(Color("Light blue"))
+
+
             }
 
         }
