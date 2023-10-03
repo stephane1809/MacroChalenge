@@ -42,7 +42,7 @@ public struct CreateGroupView: View {
                                         .scaledToFill()
                                         .frame(width: metrics.size.width * 0.92, height: metrics.size.height * 0.20)
                                         .cornerRadius(10)
-                                        .containerRelativeFrame([.horizontal])
+//                                        .containerRelativeFrame([.horizontal])
                                 } else {
                                     Image(systemName: "camera.fill").font(.system(size: 37, weight: .regular))
                                         .aspectRatio(contentMode: .fit)
