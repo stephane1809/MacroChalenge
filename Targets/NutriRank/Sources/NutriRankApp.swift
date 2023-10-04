@@ -9,7 +9,8 @@ struct NutriRankApp: App {
 //            ChallengeGroupFactory.make()
 //            CreateGroupView()
 //            OnboardingView()
-            EmptyStateView()
+//            EmptyStateView()
+            GroupView()
 
         }
     }
